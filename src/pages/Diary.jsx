@@ -2,16 +2,30 @@
 import React from "react";
 import Calendar from "../components/Calendar";
 
+import styled from "styled-components";
+
+const DiaryContainer = styled.div`
+  display: flex;
+  gap: 20rem;
+
+  .diary-text {
+    width: 50%;
+  }
+  textarea {
+    width: 100%;
+  }
+`;
+
 const Diary = () => {
   return (
     <>
-        <div className="diary-inner">
-            <Calendar />
+      <DiaryContainer>
+        <Calendar />
 
-            <div className="diary-text">
-                <textarea name="" id="" cols="30" rows="10"></textarea>
-            </div>
+        <div className="diary-text">
+          <textarea name="" id="" cols="30" rows="10"></textarea>
         </div>
+      </DiaryContainer>
     </>
   );
 };

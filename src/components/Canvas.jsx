@@ -2,6 +2,17 @@
 import { useEffect, useRef } from "react";
 import miffyWalking from "../assets/imgs/miffywalking.png";
 import miffyCursor from "../assets/imgs/bear.png";
+import styled from "styled-components";
+const RoomContainer = styled.div`
+  width: 100%;
+  height: 250rem;
+  margin-top: 20rem;
+  overflow: hidden;
+
+  img {
+    display: none;
+  }
+`;
 
 const Canvas = () => {
   const roomRef = useRef(null);
@@ -68,19 +79,16 @@ const Canvas = () => {
       ctx.stroke();
     };
 
-    
-
     const drawPlayer = () => {
       drawHouse();
       const { x, y, w, h } = miffy;
 
-      let img = imageRef.current
-      
-      if(img){
+      let img = imageRef.current;
+
+      if (img) {
         ctx.drawImage(img, x, y, w, h);
       }
-      
-     
+
       //draw text blob
       ctx.font = "14px Arial";
       const text = "Move me!"; //can be changed by user
@@ -157,12 +165,12 @@ const Canvas = () => {
       newPos();
       requestAnimationFrame(update);
     };
-  
+
     const handleMouseEvents = (e) => {
       const rect = canvas.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
       const clickY = e.clientY - rect.top;
-    
+
       switch (e.type) {
         case "mouseenter":
           canvas.style.cursor = `url(${miffyCursor}), auto`;
@@ -183,18 +191,19 @@ const Canvas = () => {
           break;
       }
     };
-    
+
     const handleClick = (clickX, clickY) => {
       miffy.x = clickX;
-      if ( 
-        clickX < canvas.width / 2 / 2 || clickX > canvas.width / 2 + canvas.width / 2 / 2 
+      if (
+        clickX < canvas.width / 2 / 2 ||
+        clickX > canvas.width / 2 + canvas.width / 2 / 2
       ) {
-         miffy.y = canvas.height - miffy.h; 
-      } else { 
-        miffy.y = clickY; 
+        miffy.y = canvas.height - miffy.h;
+      } else {
+        miffy.y = clickY;
       }
     };
-    
+
     const handleMouseDown = (clickX, clickY) => {
       isDragging.current = true;
       offset.current = {
@@ -202,22 +211,22 @@ const Canvas = () => {
         y: clickY - miffy.y,
       };
     };
-    
+
     const handleMouseMove = (clickX, clickY) => {
       if (isDragging.current) {
         const mouseX = clickX;
         const mouseY = clickY;
-    
+
         miffy.x = mouseX - offset.current.x;
         miffy.y = mouseY - offset.current.y;
-    
+
         // Keep miffy within the canvas bounds
         if (miffy.x < 0) {
           miffy.x = 0;
         } else if (miffy.x > canvas.width - miffy.w) {
           miffy.x = canvas.width - miffy.w;
         }
-    
+
         if (miffy.y < 0) {
           miffy.y = 0;
         } else if (miffy.y > canvas.height - miffy.h) {
@@ -225,7 +234,7 @@ const Canvas = () => {
         }
       }
     };
-    
+
     const handleMouseUp = () => {
       isDragging.current = false;
       offset.current = { x: 0, y: 0 };
@@ -246,7 +255,9 @@ const Canvas = () => {
         if (
           miffy.x < canvas.width / 2 / 2 ||
           miffy.x > canvas.width / 2 + canvas.width / 2 / 2
-        ) { return; }
+        ) {
+          return;
+        }
 
         miffy.dy = miffy.speed * -1;
       }
@@ -275,11 +286,10 @@ const Canvas = () => {
     canvas.addEventListener("mousedown", handleMouseEvents);
     canvas.addEventListener("mousemove", handleMouseEvents);
     canvas.addEventListener("mouseup", handleMouseEvents);
-    canvas.addEventListener("mouseenter", handleMouseEvents)
+    canvas.addEventListener("mouseenter", handleMouseEvents);
     update();
 
     return () => {
-
       window.removeEventListener("resize", handleResize);
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
@@ -291,12 +301,12 @@ const Canvas = () => {
       canvas.removeEventListener("mouseenter", handleMouseEvents);
     };
   }, []);
-  
+
   return (
-    <div className="room" ref={roomRef}>
+    <RoomContainer ref={roomRef}>
       <canvas ref={canvasRef}></canvas>
       <img src={miffyWalking} alt="miffy" ref={imageRef} />
-    </div>
+    </RoomContainer>
   );
 };
 

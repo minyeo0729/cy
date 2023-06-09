@@ -1,7 +1,26 @@
+import styled from "styled-components";
+const TodayContainer = styled.ul`
+  text-align: center;
+  li {
+    display: inline-block;
+    position: relative;
+    padding: 0 10rem;
+  }
+  li:first-child::after {
+    content: "";
+    width: 1rem;
+    height: 16rem;
+    background: #ccc;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+`;
 const Today = () => {
   return (
     <>
-      <ul className="added-font">
+      <TodayContainer>
         <li>Today : 25487</li>
         <li>
           <select name="status" id="status">
@@ -10,7 +29,7 @@ const Today = () => {
             <option value="">💛</option>
           </select>
         </li>
-      </ul>
+      </TodayContainer>
     </>
   );
 };

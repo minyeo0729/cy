@@ -18,9 +18,7 @@ function App() {
 
               <div className="home-left">
                 <div className="home-left-inner mg20">
-                  <div className="today">
-                    <Today />
-                  </div>
+                  <Today />
                   <div className="home-left-body">
                     <Profile />
                   </div>
@@ -30,9 +28,7 @@ function App() {
 
               <div className="home-right">
                 <div className="home-right-inner mg20">
-                  <div className="title">
-                    <Title />
-                  </div>
+                  <Title />
 
                   <div className="home-right-body">
                     <Nav />

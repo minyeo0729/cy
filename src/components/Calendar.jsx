@@ -1,4 +1,106 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { FaAngleRight } from 'react-icons/fa';
+import { FaAngleLeft } from 'react-icons/fa';
+const CalendarContainer = styled.div`
+  padding: 20rem;
+  border: 1rem solid #ccc;
+  border-radius: 10rem;
+  max-width: 250rem;
+  width: 50%;
+  
+  .calendar-head {
+    padding: 0 10rem 20rem; 
+    margin-bottom: 20rem; 
+    position: relative;
+    font-size: 17rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #ccc;
+    }
+  }
+ 
+  .controller button {
+    background: #E7CFCD;
+    margin-right: 10rem;
+    border-radius: 5rem;
+    height: 100%;
+    color: #Fff;
+    padding: 5rem 2rem;
+    &:last-of-type{
+      margin-right: 0
+    }
+  }
+
+  .controller button svg {
+    display: block; 
+    width: 20rem;
+  }
+
+  .calendar-body {
+    padding: 0 10rem;
+    margin-top: 10rem;
+  }
+
+  .days {
+    margin-bottom: 10rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 12rem;
+    justify-items: center;
+    font-weight: bold;
+  }
+
+  .day {
+    &:nth-child(7n) {
+      color: #396ee2;
+    }
+    &:nth-child(7n + 1){
+      color: #d13e3e;
+    }
+  }
+  
+  .dates {
+    margin-bottom: 10rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 12rem;
+    justify-items: center;
+  }
+
+  .date{
+    padding: 8rem 10rem;
+    display: inline-block;
+    border-radius: 5rem;
+    
+    &:has(.today-date){
+      background: #E7CFCD;
+      color: #Fff;
+    }
+
+    &:nth-child(7n){
+      olor: #396ee2;
+    }
+
+    &:nth-child(7n + 1){
+      color: #d13e3e;
+    }
+  }
+
+  .date .next-month {
+    opacity: 0.3;
+  }
+
+}`;
 
 const Calendar = () => {
   const [date, setDate] = useState(new Date());
@@ -41,7 +143,7 @@ const Calendar = () => {
 
     const renderedDates = dates.map((date, i) => {
       const condition =
-        i >= firstDateIndex && i < lastDateIndex + 1 ? "this" : "nextmonth";
+        i >= firstDateIndex && i < lastDateIndex + 1 ? "this" : "next-month";
       const isToday =
         date === today.getDate() &&
         showMonth === today.toLocaleString("en-US", { month: "short" }) &&
@@ -55,18 +157,21 @@ const Calendar = () => {
     });
 
     return (
-      <div className="calendar">
+      <CalendarContainer>
         <div className="calendar-head">
-          <div className="calendar-title">{`${showMonth} ${showDate}, ${showYear}`}</div>
+          <div className="calendar-title">
+            {`${showMonth} ${showDate}, ${showYear}`}
+
+            <button className="this-month-btn" onClick={thisMonth}>
+              🧡
+            </button>
+          </div>
           <div className="controller">
             <button className="prev-month-btn" onClick={prevMonth}>
-              &lt;
-            </button>
-            <button className="this-month-btn" onClick={thisMonth}>
-              today
+            <FaAngleLeft />
             </button>
             <button className="next-month-btn" onClick={nextMonth}>
-              &gt;
+            <FaAngleRight />
             </button>
           </div>
         </div>
@@ -82,7 +187,7 @@ const Calendar = () => {
           </div>
           <div className="dates">{renderedDates}</div>
         </div>
-      </div>
+      </CalendarContainer>
     );
   };
 
