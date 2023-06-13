@@ -5,9 +5,11 @@ const TitleContainer = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 16rem;
+  height: 16rem;
+  
   li:last-child a {
-    font-size: 13rem;
-    color: #666;
+    color: var(--darkgray);
   }
 `;
 

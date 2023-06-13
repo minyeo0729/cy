@@ -3,12 +3,19 @@ import styled from "styled-components";
 
 const ProfileContainer = styled.div`
   text-align: center;
-  margin: 10rem 0 30rem;
+  margin: 10rem 0 20rem;
+
   div {
     clip-path: circle(70rem at center);
     display: inline-block;
     max-width: 140rem;
+
+    @media (max-width: 768px){
+      clip-path: circle(50rem at center);
+      max-width: 100rem;
+    }
   }
+
   div img {
     width: 100%;
     display: block;
@@ -22,6 +29,11 @@ const ProfileContainer = styled.div`
 const BioContainer = styled.div`
   padding-top: 25rem;
   position: relative;
+
+  @media (max-width: 540px){
+    padding-top: 15rem;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -29,14 +41,18 @@ const BioContainer = styled.div`
     top: 0;
     width: 100%;
     height: 1px;
-    background: #ccc;
+    background: var(--border);
   }
+
   p {
-    margin-bottom: 20rem;
+    margin-bottom: 12rem;
+    line-height: 1.3;
   }
+
   p:last-of-type {
     margin-bottom: 0;
   }
+
 `;
 
 const Profile = () => {

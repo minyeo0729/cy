@@ -6,20 +6,44 @@ const Gnb = styled.ul`
   top: 20rem;
   right: 0;
   transform: translateX(100%);
+
+  @media (max-width: 540px){
+    right: auto; 
+    left: 0;
+    top:5%;
+    transform: translateX(0);
+    width: 100%;
+    text-align: center;
+  }
+
+  li{
+    @media (max-width: 540px){
+      display: inline-block;
+      margin-right: 10rem;
+    }
+  }
+
   li a {
     display: block;
     padding: 7rem;
     margin-bottom: 3rem;
-    background: #ff8484;
-    border: 1rem solid #ccc;
+    background: var(--main);
+    border: 1rem solid var(--border);
     border-radius: 0 5rem 5rem 0;
     border-left: 0;
     font-size: 14rem;
-    color: #fff;
+    color: var(--white);
     text-align: center;
+
+    @media (max-width: 540px){
+      font-size: 12rem;
+      border-left: 1rem solid var(--border);
+      border-radius: 5rem;
+    }
   }
+
   li a.active {
-    background: #fff;
+    background: var(--white);
     color: #000;
   }
 `;

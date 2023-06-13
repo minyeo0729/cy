@@ -1,18 +1,22 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import Calendar from "../components/Calendar";
-
+import Calendar from "../components/Calendar/Calendar";
 import styled from "styled-components";
+import Write from "../components/Write";
 
 const DiaryContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-itmes: stretch;
   gap: 20rem;
+  height: 100%;
 
-  .diary-text {
-    width: 50%;
-  }
-  textarea {
-    width: 100%;
+  @media (max-width: 1023px) {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
 `;
 
@@ -21,10 +25,7 @@ const Diary = () => {
     <>
       <DiaryContainer>
         <Calendar />
-
-        <div className="diary-text">
-          <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+        <Write />
       </DiaryContainer>
     </>
   );

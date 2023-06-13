@@ -3,11 +3,21 @@ import { useEffect, useRef } from "react";
 import miffyWalking from "../assets/imgs/miffywalking.png";
 import miffyCursor from "../assets/imgs/bear.png";
 import styled from "styled-components";
+
 const RoomContainer = styled.div`
   width: 100%;
   height: 250rem;
   margin-top: 20rem;
-  overflow: hidden;
+
+  @media (max-width: 768px){
+    height: 100%;
+    max-height: 200rem;
+  }
+
+  @media (max-width: 540px){
+    height: 100%;
+    max-height: none;
+  }
 
   img {
     display: none;
