@@ -25,7 +25,6 @@
 .home-left-body, .home-right-body { position: relative; height: 100%;  background: var(--white);margin-top: 20rem;  border-radius: 10rem;  padding: 20rem; border: 1rem solid var(--border);height: 100vh; max-height: 370rem; }
 
 .mg20 { margin: 20rem; } 
- 
 @media (max-width: 1180px) {
     #root { padding: 30rem; } 
 }
